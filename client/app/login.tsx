@@ -9,13 +9,14 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
     try {
+      setError(null); // Clear previous errors
       await login(email, password);
     } catch (error) {
-      alert('Invalid credentials');
-      console.log(error);
+      setError(`Invalid credentials. Please try again!\n${error}`);
     }
   };
 
@@ -23,6 +24,9 @@ export default function LoginScreen() {
     <View className="flex-1 justify-center bg-black px-6 py-10">
       <Text className="mb-5 text-4xl font-bold text-white">Sign in</Text>
       <Text className="mb-6 text-neutral-500">Log in to your account.</Text>
+
+      {/* Show error message */}
+      {error && <Text className="mb-4 text-red-500">{error}</Text>}
 
       <View className="my-4 flex-row items-center rounded-xl border border-gray-500 p-4">
         <TextInput
@@ -33,7 +37,7 @@ export default function LoginScreen() {
           onChangeText={setEmail}
           keyboardType="email-address"
         />
-        {email.includes('@') ? <Entypo name="check" size={24} color="white" /> : ''}
+        {email.includes('@') ? <Entypo name="check" size={24} color="white" /> : null}
       </View>
 
       <View className="mb-6 flex-row items-center rounded-xl border border-gray-500 p-4">

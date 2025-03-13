@@ -48,7 +48,7 @@ export const loginUserController = async (req: Request, res: Response) => {
       sameSite: "strict",
     });
 
-    res.status(200).json({ success: true, loginUser: user });
+    res.status(200).json({ success: true, token, loginUser: user });
   } catch (error: any) {
     res.status(400).json({ success: false, message: error.message });
   }
