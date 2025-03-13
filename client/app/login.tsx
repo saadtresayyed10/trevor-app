@@ -1,4 +1,5 @@
 import Entypo from '@expo/vector-icons/Entypo';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
@@ -16,7 +17,8 @@ export default function LoginScreen() {
       setError(null); // Clear previous errors
       await login(email, password);
     } catch (error) {
-      setError(`Invalid credentials. Please try again!\n${error}`);
+      setError(`Invalid credentials. Please try again!`);
+      console.log(error);
     }
   };
 
@@ -76,7 +78,12 @@ export default function LoginScreen() {
         </TouchableOpacity>
 
         <Text className="mt-4 text-center text-neutral-500">
-          Don't have an account? <Text className="font-semibold text-violet-500">Sign up</Text>
+          Don't have an account?{' '}
+          <Text
+            className="font-semibold text-violet-500"
+            onPress={() => router.push('/register/name-email')}>
+            Sign up
+          </Text>
         </Text>
       </View>
     </View>
