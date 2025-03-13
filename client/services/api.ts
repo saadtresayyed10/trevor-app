@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = process.env.BACKEND_URL || 'https://welcome-dulcea-groven-a5a35bd1.koyeb.app/api';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL!,
   headers: {
     'Content-Type': 'application/json',
   },
